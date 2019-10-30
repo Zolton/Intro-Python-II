@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -21,6 +22,7 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+# print(room["treasure"])
 
 # Link rooms together
 
@@ -39,8 +41,14 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+playerOne = Player("Henry", room["outside"])
 # Write a loop that:
 #
+def movement():
+    print(f"Hello, {playerOne.name}, you are at {playerOne.currentRoom}.  Your inventory consists of {playerOne.items}")
+    
+
+print(movement())
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
