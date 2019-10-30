@@ -12,11 +12,11 @@ class Player:
     def updateRoom(self, direction):
         self.currentRoom = direction
     
-    def __eq__(self, lastLocation):
-        if self.currentRoom == self.lastRoom:
-            return True
-        else:
-            return False
+    # def __eq__(self, lastLocation):
+    #     if self.currentRoom == self.lastRoom:
+    #         return True
+    #     else:
+    #         return False
     
     def updatePreviousRoom(self, lastLocation):
         self.lastRoom = lastLocation

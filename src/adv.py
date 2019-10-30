@@ -44,43 +44,53 @@ playerOne = Player("Henry", room["outside"], room["treasure"])
 # Write a loop that:
 #
 def movement():   
+    # if playerOne.currentRoom.name == playerOne.lastRoom.name:
+    #     print("You cannot go in that direction")
     if playerOne.currentRoom == room['outside'] and playGame.move == "north":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['outside'])
     elif playerOne.currentRoom == room['foyer'] and playGame.move == "south":
         playerOne.updateRoom(room['outside'])
+        playerOne.updatePreviousRoom(room['foyer'])
     elif playerOne.currentRoom == room['foyer'] and playGame.move == "north":
         playerOne.updateRoom(room['overlook'])
+        playerOne.updatePreviousRoom(room['foyer'])
     elif playerOne.currentRoom == room['overlook'] and playGame.move == "south":
         playerOne.updateRoom(room['foyer'])
+        playerOne.updatePreviousRoom(room['overlook'])
     elif playerOne.currentRoom == room['foyer'] and playGame.move == "east":
         playerOne.updateRoom(room['narrow'])
+        playerOne.updatePreviousRoom(room['foyer'])
     elif playerOne.currentRoom == room['narrow'] and playGame.move == "west":
         playerOne.updateRoom(room['foyer'])
+        playerOne.updatePreviousRoom(room['narrow'])
     elif playerOne.currentRoom == room['narrow'] and playGame.move == "north":
         playerOne.updateRoom(room['treasure'])
+        playerOne.updatePreviousRoom(room['narrow'])
     elif playerOne.currentRoom == room['treasure'] and playGame.move == "south":
         playerOne.updateRoom(room['narrow'])
-    elif playerOne.__eq__ == True:
-        print("You cannot go in that direction")
+        playerOne.updatePreviousRoom(room['treasure'])
+    # elif playerOne.__eq__ == True:
+    #     print("You cannot go in that direction")
     else:
         print("Invalid Input")
-    
 
 def playGame():
     running = True
+    print(f"Hello, {playerOne.name}, let's go on an adventure.    Your inventory consists of {playerOne.items}.  Press Q to quit at any time")
+    playerOne.lastRoom.name = "the sheer cliff you just scaled"
     while running:
-        print(f"Hello, {playerOne.name}, you are at {playerOne.currentRoom}.  Your inventory consists of {playerOne.items}.  Press Q to quit at any time")
+        print(f"You leave {playerOne.lastRoom.name} and enter {playerOne.currentRoom.name}.  You look and see that {playerOne.currentRoom.description}")
         playGame.move = input("Enter which direction you want to go: ")
         if playGame.move == "q":
             print(f"{playerOne.name} decides to quit.  Have a nice day")
             running = False
         else:
-            movement()
-
-        
+            movement()     
 
 print(playGame())
+
+
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
