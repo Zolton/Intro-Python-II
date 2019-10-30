@@ -22,18 +22,17 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-# print(room["treasure"])
 
 # Link rooms together
 
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
+#room['outside'].n_to = room['foyer']
+#room['foyer'].s_to = room['outside']
+#room['foyer'].n_to = room['overlook']
+#room['foyer'].e_to = room['narrow']
+#room['overlook'].s_to = room['foyer']
+#room['narrow'].w_to = room['foyer']
+#room['narrow'].n_to = room['treasure']
+#room['treasure'].s_to = room['narrow']
 
 #
 # Main
@@ -41,14 +40,47 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-playerOne = Player("Henry", room["outside"])
+playerOne = Player("Henry", room["outside"], room["treasure"])
 # Write a loop that:
 #
-def movement():
-    print(f"Hello, {playerOne.name}, you are at {playerOne.currentRoom}.  Your inventory consists of {playerOne.items}")
+def movement():   
+    if playerOne.currentRoom == room['outside'] and playGame.move == "north":
+        playerOne.updateRoom(room['foyer'])
+        playerOne.updatePreviousRoom(room['outside'])
+    elif playerOne.currentRoom == room['foyer'] and playGame.move == "south":
+        playerOne.updateRoom(room['outside'])
+    elif playerOne.currentRoom == room['foyer'] and playGame.move == "north":
+        playerOne.updateRoom(room['overlook'])
+    elif playerOne.currentRoom == room['overlook'] and playGame.move == "south":
+        playerOne.updateRoom(room['foyer'])
+    elif playerOne.currentRoom == room['foyer'] and playGame.move == "east":
+        playerOne.updateRoom(room['narrow'])
+    elif playerOne.currentRoom == room['narrow'] and playGame.move == "west":
+        playerOne.updateRoom(room['foyer'])
+    elif playerOne.currentRoom == room['narrow'] and playGame.move == "north":
+        playerOne.updateRoom(room['treasure'])
+    elif playerOne.currentRoom == room['treasure'] and playGame.move == "south":
+        playerOne.updateRoom(room['narrow'])
+    elif playerOne.__eq__ == True:
+        print("You cannot go in that direction")
+    else:
+        print("Invalid Input")
     
 
-print(movement())
+def playGame():
+    running = True
+    while running:
+        print(f"Hello, {playerOne.name}, you are at {playerOne.currentRoom}.  Your inventory consists of {playerOne.items}.  Press Q to quit at any time")
+        playGame.move = input("Enter which direction you want to go: ")
+        if playGame.move == "q":
+            print(f"{playerOne.name} decides to quit.  Have a nice day")
+            running = False
+        else:
+            movement()
+
+        
+
+print(playGame())
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
