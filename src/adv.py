@@ -58,60 +58,25 @@ items = {
 playerOne = Player("Henry", room["outside"], room["treasure"])
 
 room["outside"].addItemsToRoom(items["torch"])
-# , items["hat"])
+room["outside"].addItemsToRoom(items["hat"])
 room["foyer"].addItemsToRoom(items["whip"])
 room["overlook"].addItemsToRoom(items["rope"])
 room["narrow"].addItemsToRoom(items["gun"])
 room["treasure"].addItemsToRoom(items["treasure"])
-#scores = [ student.name for student in names if student.gender == "Male" ]
-
-# print(room["outside"].__str__)
-# Write a loop that:
-#
-
-# def itemLoop():
-# for eachItem in playerOne.currentRoom.items:
-#print("eachItem is ", eachItem)
-# for each in eachItem:
-# playerOne.viewableItems(each)
-# print ("each is ", each)
-# print("playeritems is ", playerOne.whatPlayerSees)
-# print(each.itemName)
-#roomItems = each.itemDescription
-
 
 def movement():
-    # if playerOne.currentRoom.name == playerOne.lastRoom.name:
-    #     print("You cannot go in that direction")
     if playerOne.currentRoom == room['outside'] and playGame.action == "north":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['outside'])
-        for eachItem in playerOne.currentRoom.items:
-            for each in eachItem:
-                roomItems = each.itemDescription
-        #print ("items are ", playerOne.currentRoom.items)
-
-        # for eachItem in room["outside"].items:
-        #     print("eachItem is ", eachItem)
-        #     for each in eachItem:
-        #         #playerOne.viewableItems(each)
-        #         print ("each is ", each)
-        #         #print("playeritems is ", playerOne.whatPlayerSees)
-        #         print("each itemName is: ", each.itemName)
-        #         print("each itemDescription is ", each.itemDescription)
-
     elif playerOne.currentRoom == room['foyer'] and playGame.action == "south":
         playerOne.updateRoom(room['outside'])
         playerOne.updatePreviousRoom(room['foyer'])
-
     elif playerOne.currentRoom == room['foyer'] and playGame.action == "north":
         playerOne.updateRoom(room['overlook'])
         playerOne.updatePreviousRoom(room['foyer'])
-
     elif playerOne.currentRoom == room['overlook'] and playGame.action == "south":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['overlook'])
-
     elif playerOne.currentRoom == room['foyer'] and playGame.action == "east":
         playerOne.updateRoom(room['narrow'])
         playerOne.updatePreviousRoom(room['foyer'])
@@ -124,11 +89,8 @@ def movement():
     elif playerOne.currentRoom == room['treasure'] and playGame.action == "south":
         playerOne.updateRoom(room['narrow'])
         playerOne.updatePreviousRoom(room['treasure'])
-    # elif playerOne.__eq__ == True:
-    #     print("You cannot go in that direction")
     else:
         print("Invalid Input")
-
 
 def getItem():
     test = playGame.action.split()
@@ -136,9 +98,7 @@ def getItem():
         if test[0] == "get":
             for eachItem in playerOne.currentRoom.items:
                 for each in eachItem:
-                    #print("each.itemName is ", each.itemName)
                     if test[1] == each.itemName:
-                        print("each is room item ", each)
                         playerOne.addItem(each)
                         playerOne.currentRoom.removeItemsFromRoom(each)
                     else:
@@ -147,28 +107,16 @@ def getItem():
             for eachItem in playerOne.playerInventory:
                 for each in eachItem:
                     if test[1] == each.itemName:
-                        print("each is inven", each)
-                        #print("each.itemName is ", each.itemName)
                         playerOne.dropItem(each)
                         playerOne.currentRoom.addItemsToRoom(each)
                     else:
                         print("You mispelled that")
-
         elif test[0] == "inventory":
             for eachItem in playerOne.playerInventory:
-                print("eachItem is ", eachItem)
                 for each in eachItem:
-                    print("each is ", each)
-                #print("eachItemName is ", eachItem.itemName)
-                    # if len(each) == 0:
-                    #     print("Your inventory is empty")
-                    # else:
                     print("\nYour inventory is ", each.itemDescription)
         else:
             print("Please try again")
-    # else:
-       # print("one word")
-
 
 def playGame():
     running = True
@@ -186,8 +134,6 @@ def playGame():
         else:
             movement()
             getItem()
-
-
 print(playGame())
 
 
