@@ -1,0 +1,7 @@
+class Items:
+    def __init__(self, itemName, itemDescription):
+        self.itemName = itemName
+        self.itemDescription = itemDescription
+
+    def __str__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)

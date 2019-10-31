@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from items import Items
 
 # Declare all the rooms
 
@@ -22,6 +23,19 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+items = {
+    'torch':  Items("Torch",
+                     "A brightly burning torch that can light even the darkest passages"),
+
+    'rope':    Items("Rope", """A long length of rope, sturdy and ready to be used"""),
+
+    'gun': Items("Gun", """A shiny Glock 17. Examining the magazine, you see it only has 7 bullets left.  Better make them count"""),
+
+    'whip':   Items("Whip", """A 5 foot whip.  You feel like Indiana Jones and suddenly want to whip someone"""),
+
+    'hat': Items("Hat", """An explorers hat.  You know deep down that you'll never be worthy of it"""),
+}
+
 
 # Link rooms together
 
@@ -41,33 +55,43 @@ earlier adventurers. The only exit is to the south."""),
 # Make a new player object that is currently in the 'outside' room.
 
 playerOne = Player("Henry", room["outside"], room["treasure"])
+
+room["outside"].addItemsToRoom(items["torch"])
+scores = [ student.name for student in names if student.gender == "Male" ]
+
+#print(room["outside"].__str__)
 # Write a loop that:
 #
 def movement():   
     # if playerOne.currentRoom.name == playerOne.lastRoom.name:
     #     print("You cannot go in that direction")
-    if playerOne.currentRoom == room['outside'] and playGame.move == "north":
+    if playerOne.currentRoom == room['outside'] and playGame.action == "north":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['outside'])
-    elif playerOne.currentRoom == room['foyer'] and playGame.move == "south":
+        print(items)
+        #for eachItem in room["outside"].items
+        #    print("this is test", eachItem.itemName)
+       # print("room items", room["outside"].items)
+        #playerOne.viewableItems(room["outside"].items)
+    elif playerOne.currentRoom == room['foyer'] and playGame.action == "south":
         playerOne.updateRoom(room['outside'])
         playerOne.updatePreviousRoom(room['foyer'])
-    elif playerOne.currentRoom == room['foyer'] and playGame.move == "north":
+    elif playerOne.currentRoom == room['foyer'] and playGame.action == "north":
         playerOne.updateRoom(room['overlook'])
         playerOne.updatePreviousRoom(room['foyer'])
-    elif playerOne.currentRoom == room['overlook'] and playGame.move == "south":
+    elif playerOne.currentRoom == room['overlook'] and playGame.action == "south":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['overlook'])
-    elif playerOne.currentRoom == room['foyer'] and playGame.move == "east":
+    elif playerOne.currentRoom == room['foyer'] and playGame.action == "east":
         playerOne.updateRoom(room['narrow'])
         playerOne.updatePreviousRoom(room['foyer'])
-    elif playerOne.currentRoom == room['narrow'] and playGame.move == "west":
+    elif playerOne.currentRoom == room['narrow'] and playGame.action == "west":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['narrow'])
-    elif playerOne.currentRoom == room['narrow'] and playGame.move == "north":
+    elif playerOne.currentRoom == room['narrow'] and playGame.action == "north":
         playerOne.updateRoom(room['treasure'])
         playerOne.updatePreviousRoom(room['narrow'])
-    elif playerOne.currentRoom == room['treasure'] and playGame.move == "south":
+    elif playerOne.currentRoom == room['treasure'] and playGame.action == "south":
         playerOne.updateRoom(room['narrow'])
         playerOne.updatePreviousRoom(room['treasure'])
     # elif playerOne.__eq__ == True:
@@ -77,12 +101,12 @@ def movement():
 
 def playGame():
     running = True
-    print(f"Hello, {playerOne.name}, let's go on an adventure.    Your inventory consists of {playerOne.items}.  Press Q to quit at any time")
+    print(f"Hello, {playerOne.name}, let's go on an adventure.    Your inventory consists of {playerOne.playerInventory}.  Press Q to quit at any time")
     playerOne.lastRoom.name = "the sheer cliff you just scaled"
     while running:
-        print(f"You leave {playerOne.lastRoom.name} and enter {playerOne.currentRoom.name}.  You look and see that {playerOne.currentRoom.description}")
-        playGame.move = input("Enter which direction you want to go: ")
-        if playGame.move == "q":
+        print(f"You leave {playerOne.lastRoom.name} and enter {playerOne.currentRoom.name}.  You look and see that {playerOne.currentRoom.description}.  You can see {playerOne.whatPlayerSees} on the floor")
+        playGame.action = input("Enter which direction you want to go: ")
+        if playGame.action == "q":
             print(f"{playerOne.name} decides to quit.  Have a nice day")
             running = False
         else:
