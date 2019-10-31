@@ -8,7 +8,7 @@ class Player:
         self.currentRoom = currentRoom
         self.lastRoom = lastRoom
         self.playerInventory = []
-        self.whatPlayerSees = []
+        #self.whatPlayerSees = []
     
     def updateRoom(self, direction):
         self.currentRoom = direction
@@ -25,13 +25,13 @@ class Player:
     def updatePreviousRoom(self, lastLocation):
         self.lastRoom = lastLocation
     
-    def addItem(self, playerItemAdd):
+    def addItem(self, *playerItemAdd):
         self.playerInventory.append(playerItemAdd)
-        print(f"You've added {playerItemAdd}, your inventory is {self.playerInventory}")
+        print(f"\nYou've added {playerItemAdd}, your inventory is {self.playerInventory}\n")
     
-    def dropItem(self, itemDrop):
+    def dropItem(self, *itemDrop):
         self.playerInventory.remove(itemDrop)
-        print(f"Your current inventory: {self.playerInventory}")
+        print(f"\nYour current inventory: {self.playerInventory}\n")
     
     
     

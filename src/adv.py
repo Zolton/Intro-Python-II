@@ -34,6 +34,7 @@ items = {
     'whip':   Items("Whip", """A 5 foot whip.  You feel like Indiana Jones and suddenly want to whip someone"""),
 
     'hat': Items("Hat", """An explorers hat.  You know deep down that you'll never be worthy of it"""),
+    'treasure': Items("Treasure", """And old crown, worth at least a few bucks.  At least this trip wasn't a total loss""")
 }
 
 
@@ -57,10 +58,11 @@ items = {
 playerOne = Player("Henry", room["outside"], room["treasure"])
 
 room["outside"].addItemsToRoom(items["torch"])
+#, items["hat"])
 room["foyer"].addItemsToRoom(items["whip"])
 room["overlook"].addItemsToRoom(items["rope"])
 room["narrow"].addItemsToRoom(items["gun"])
-room["treasure"].addItemsToRoom(items["hat"])
+room["treasure"].addItemsToRoom(items["treasure"])
 #scores = [ student.name for student in names if student.gender == "Male" ]
 
 #print(room["outside"].__str__)
@@ -133,15 +135,34 @@ def getItem():
         if test[0] == "get":
             for eachItem in playerOne.currentRoom.items:
                 for each in eachItem:
-                    print("each is ", each)
-                    playerOne.addItem(each)
-                    playerOne.currentRoom.removeItemsFromRoom(each)
+                    #print("each.itemName is ", each.itemName)
+                    if test[1] == each.itemName:
+                        print("each is room item ", each)
+                        playerOne.addItem(each)
+                        playerOne.currentRoom.removeItemsFromRoom(each)
+                    else:
+                        print("You mispelled that")
         elif test[0] ==  "drop":
             for eachItem in playerOne.playerInventory:
-                playerOne.dropItem(eachItem)
-                playerOne.currentRoom.addItemsToRoom(eachItem)
+                for each in eachItem:
+                    if test[1] == each.itemName:
+                        print("each is inven", each)
+                        #print("each.itemName is ", each.itemName)
+                        playerOne.dropItem(each)
+                        playerOne.currentRoom.addItemsToRoom(each)
+                    else:
+                        print("You mispelled that")
+                
         elif test[0] == "inventory":
-            print("Your inventory is ", playerOne.playerInventory)
+            for eachItem in playerOne.playerInventory:
+                print("eachItem is ", eachItem)
+                for each in eachItem:
+                    print("each is ", each)
+                #print("eachItemName is ", eachItem.itemName)
+                    # if len(each) == 0:
+                    #     print("Your inventory is empty")
+                    # else:
+                    print("\nYour inventory is ", each.itemDescription)
         else:
             print("Please try again")
     #else:
@@ -152,6 +173,9 @@ def playGame():
     print(f"Hello, {playerOne.name}, let's go on an adventure.    Your inventory consists of {playerOne.playerInventory}.  Press Q to quit at any time")
     playerOne.lastRoom.name = "the sheer cliff you just scaled"
     while running:
+        #if len(playerOne.currentRoom.items) == 0:
+            #playerOne.currentRoom.items = "nothing"
+        # ^ Turns item list into a string.  Bad transformation
         print(f"You leave {playerOne.lastRoom.name} and enter {playerOne.currentRoom.name}.  You look and see that {playerOne.currentRoom.description}.  You can see {playerOne.currentRoom.items} on the floor")
         playGame.action = input("Enter which direction you want to go: ")
         if playGame.action == "q":

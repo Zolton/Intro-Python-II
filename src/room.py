@@ -7,13 +7,13 @@ class Room:
         self.description = description
         self.items = []
     
-    def addItemsToRoom (self, *item):
-        self.items.append(item)
-        print(f"You added {item} to the room")
+    def addItemsToRoom (self, *itemAdd):
+        self.items.append(itemAdd)
+        print(f"\nYou added {itemAdd} to the room\n")
     
-    def removeItemsFromRoom (self, *item):
-        self.items.remove(item)
-        print(f"{item} was picked up")
+    def removeItemsFromRoom (self, *itemDrop):
+        self.items.remove(itemDrop)
+        print(f"\n{itemDrop} was picked up\n")
     
     # def listItemsInRoom(self):
     #     print (self.items)
