@@ -56,8 +56,8 @@ items = {
 
 playerOne = Player("Henry", room["outside"], room["treasure"])
 
-room["outside"].addItemsToRoom(items["torch"])
-scores = [ student.name for student in names if student.gender == "Male" ]
+room["outside"].addItemsToRoom(items["torch"], items["hat"])
+#scores = [ student.name for student in names if student.gender == "Male" ]
 
 #print(room["outside"].__str__)
 # Write a loop that:
@@ -68,7 +68,8 @@ def movement():
     if playerOne.currentRoom == room['outside'] and playGame.action == "north":
         playerOne.updateRoom(room['foyer'])
         playerOne.updatePreviousRoom(room['outside'])
-        print(items)
+        print(room["outside"])
+        #print(items)
         #for eachItem in room["outside"].items
         #    print("this is test", eachItem.itemName)
        # print("room items", room["outside"].items)

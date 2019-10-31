@@ -18,8 +18,9 @@ class Room:
     # def listItemsInRoom(self):
     #     print (self.items)
     
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
+    def __repr__(self):
+        #return str(self.__class__) + ": " + str(self.__dict__)
+        return f"{self.items}"
 
     
     # def describeRoom(self):

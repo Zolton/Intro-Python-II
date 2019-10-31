@@ -31,6 +31,6 @@ class Player:
     
     def dropItem(self, itemDrop):
         self.playerInventory.remove(itemDrop)
-        print(f"Your current inventory: {self.playerItems}")
+        print(f"Your current inventory: {self.playerInventory}")
     
 
