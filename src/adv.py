@@ -25,7 +25,7 @@ earlier adventurers. The only exit is to the south."""),
 
 items = {
     'torch':  Items("Torch",
-                     "A brightly burning torch that can light even the darkest passages"),
+                    "A brightly burning torch that can light even the darkest passages"),
 
     'rope':    Items("Rope", """A long length of rope, sturdy and ready to be used"""),
 
@@ -58,28 +58,29 @@ items = {
 playerOne = Player("Henry", room["outside"], room["treasure"])
 
 room["outside"].addItemsToRoom(items["torch"])
-#, items["hat"])
+# , items["hat"])
 room["foyer"].addItemsToRoom(items["whip"])
 room["overlook"].addItemsToRoom(items["rope"])
 room["narrow"].addItemsToRoom(items["gun"])
 room["treasure"].addItemsToRoom(items["treasure"])
 #scores = [ student.name for student in names if student.gender == "Male" ]
 
-#print(room["outside"].__str__)
+# print(room["outside"].__str__)
 # Write a loop that:
 #
 
-#def itemLoop():
-   # for eachItem in playerOne.currentRoom.items:
-            #print("eachItem is ", eachItem)
-            #for each in eachItem:
-                # playerOne.viewableItems(each)
-                # print ("each is ", each)
-                # print("playeritems is ", playerOne.whatPlayerSees)
-                # print(each.itemName)
-                #roomItems = each.itemDescription
+# def itemLoop():
+# for eachItem in playerOne.currentRoom.items:
+#print("eachItem is ", eachItem)
+# for each in eachItem:
+# playerOne.viewableItems(each)
+# print ("each is ", each)
+# print("playeritems is ", playerOne.whatPlayerSees)
+# print(each.itemName)
+#roomItems = each.itemDescription
 
-def movement():   
+
+def movement():
     # if playerOne.currentRoom.name == playerOne.lastRoom.name:
     #     print("You cannot go in that direction")
     if playerOne.currentRoom == room['outside'] and playGame.action == "north":
@@ -98,7 +99,6 @@ def movement():
         #         #print("playeritems is ", playerOne.whatPlayerSees)
         #         print("each itemName is: ", each.itemName)
         #         print("each itemDescription is ", each.itemDescription)
-
 
     elif playerOne.currentRoom == room['foyer'] and playGame.action == "south":
         playerOne.updateRoom(room['outside'])
@@ -129,6 +129,7 @@ def movement():
     else:
         print("Invalid Input")
 
+
 def getItem():
     test = playGame.action.split()
     if len(test) == 2:
@@ -142,7 +143,7 @@ def getItem():
                         playerOne.currentRoom.removeItemsFromRoom(each)
                     else:
                         print("You mispelled that")
-        elif test[0] ==  "drop":
+        elif test[0] == "drop":
             for eachItem in playerOne.playerInventory:
                 for each in eachItem:
                     if test[1] == each.itemName:
@@ -152,7 +153,7 @@ def getItem():
                         playerOne.currentRoom.addItemsToRoom(each)
                     else:
                         print("You mispelled that")
-                
+
         elif test[0] == "inventory":
             for eachItem in playerOne.playerInventory:
                 print("eachItem is ", eachItem)
@@ -165,15 +166,16 @@ def getItem():
                     print("\nYour inventory is ", each.itemDescription)
         else:
             print("Please try again")
-    #else:
+    # else:
        # print("one word")
+
 
 def playGame():
     running = True
     print(f"Hello, {playerOne.name}, let's go on an adventure.    Your inventory consists of {playerOne.playerInventory}.  Press Q to quit at any time")
     playerOne.lastRoom.name = "the sheer cliff you just scaled"
     while running:
-        #if len(playerOne.currentRoom.items) == 0:
+        # if len(playerOne.currentRoom.items) == 0:
             #playerOne.currentRoom.items = "nothing"
         # ^ Turns item list into a string.  Bad transformation
         print(f"You leave {playerOne.lastRoom.name} and enter {playerOne.currentRoom.name}.  You look and see that {playerOne.currentRoom.description}.  You can see {playerOne.currentRoom.items} on the floor")
@@ -184,6 +186,7 @@ def playGame():
         else:
             movement()
             getItem()
+
 
 print(playGame())
 
