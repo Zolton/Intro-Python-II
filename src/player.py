@@ -33,4 +33,6 @@ class Player:
         self.playerInventory.remove(itemDrop)
         print(f"Your current inventory: {self.playerInventory}")
     
+    
+    
 

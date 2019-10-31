@@ -9,7 +9,7 @@ class Room:
     
     def addItemsToRoom (self, *item):
         self.items.append(item)
-        print(f"You added {self.items in range (2)} to the room")
+        print(f"You added {item} to the room")
     
     def removeItemsFromRoom (self, **item):
         self.items.remove(item)
@@ -20,7 +20,20 @@ class Room:
     
     def __repr__(self):
         #return str(self.__class__) + ": " + str(self.__dict__)
-        return f"{self.items}"
+        #return f"{self.items}"
+        for eachItem in self.items:
+            for each in eachItem:
+                return each.itemDescription
+
+#def itemLoop():
+   # for eachItem in playerOne.currentRoom.items:
+            #print("eachItem is ", eachItem)
+            #for each in eachItem:
+                # playerOne.viewableItems(each)
+                # print ("each is ", each)
+                # print("playeritems is ", playerOne.whatPlayerSees)
+                # print(each.itemName)
+                #roomItems = each.itemDescription
 
     
     # def describeRoom(self):

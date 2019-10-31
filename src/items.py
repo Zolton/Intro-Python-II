@@ -7,5 +7,7 @@ class Items:
     #     return str(self.__class__) + ": " + str(self.__dict__)
     
     def __repr__(self):
-        return f"{self.itemName}"
+        return f"{self.itemName}: {self.itemDescription}"
         # str(self.__class__) + ": " + str(self.__dict__)
+
+    
