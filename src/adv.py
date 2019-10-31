@@ -56,10 +56,11 @@ items = {
 
 playerOne = Player("Henry", room["outside"], room["treasure"])
 
-room["outside"].addItemsToRoom(items["torch"], items["hat"])
+room["outside"].addItemsToRoom(items["torch"])
 room["foyer"].addItemsToRoom(items["whip"])
 room["overlook"].addItemsToRoom(items["rope"])
 room["narrow"].addItemsToRoom(items["gun"])
+room["treasure"].addItemsToRoom(items["hat"])
 #scores = [ student.name for student in names if student.gender == "Male" ]
 
 #print(room["outside"].__str__)
@@ -129,7 +130,20 @@ def movement():
 def getItem():
     test = playGame.action.split()
     if len(test) == 2:
-        print ("you just typed ", test[0])
+        if test[0] == "get":
+            for eachItem in playerOne.currentRoom.items:
+                for each in eachItem:
+                    print("each is ", each)
+                    playerOne.addItem(each)
+                    playerOne.currentRoom.removeItemsFromRoom(each)
+        elif test[0] ==  "drop":
+            for eachItem in playerOne.playerInventory:
+                playerOne.dropItem(eachItem)
+                playerOne.currentRoom.addItemsToRoom(eachItem)
+        elif test[0] == "inventory":
+            print("Your inventory is ", playerOne.playerInventory)
+        else:
+            print("Please try again")
     #else:
        # print("one word")
 

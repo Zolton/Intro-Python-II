@@ -27,7 +27,7 @@ class Player:
     
     def addItem(self, playerItemAdd):
         self.playerInventory.append(playerItemAdd)
-        print(f"You've added {playerItemAdd}")
+        print(f"You've added {playerItemAdd}, your inventory is {self.playerInventory}")
     
     def dropItem(self, itemDrop):
         self.playerInventory.remove(itemDrop)

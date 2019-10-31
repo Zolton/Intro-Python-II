@@ -11,9 +11,9 @@ class Room:
         self.items.append(item)
         print(f"You added {item} to the room")
     
-    def removeItemsFromRoom (self, **item):
+    def removeItemsFromRoom (self, *item):
         self.items.remove(item)
-        print(f"You drop {item} on the floor")
+        print(f"{item} was picked up")
     
     # def listItemsInRoom(self):
     #     print (self.items)
@@ -33,7 +33,7 @@ class Room:
                 # print ("each is ", each)
                 # print("playeritems is ", playerOne.whatPlayerSees)
                 # print(each.itemName)
-                #roomItems = each.itemDescription
+                # roomItems = each.itemDescription
 
     
     # def describeRoom(self):
